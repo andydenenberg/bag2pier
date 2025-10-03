@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pier Finder">
+  <title>Bag Tag Scanner</title>
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%23667eea;stop-opacity:1'/><stop offset='100%' style='stop-color:%23764ba2;stop-opacity:1'/></linearGradient></defs><rect width='200' height='200' fill='url(%23grad)'/><text x='100' y='130' font-size='100' text-anchor='middle' fill='white'>✈️</text></svg>">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 28px;
+      text-align: center;
+    }
+    .subtitle {
+      color: #666;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .upload-area {
+      border: 3px dashed #667eea;
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #f8f9ff;
+    }
+    .upload-area:hover {
+      border-color: #764ba2;
+      background: #f0f2ff;
+    }
+    .upload-area.dragover {
+      border-color: #764ba2;
+      background: #e8ebff;
+      transform: scale(1.02);
+    }
+    .upload-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+    .upload-text {
+      color: #667eea;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .upload-hint {
+      color: #999;
+      font-size: 14px;
+    }
+    #fileInput {
+      display: none;
+    }
+    #preview {
+      margin-top: 20px;
+      text-align: center;
+      display: none;
+    }
+    #previewImage {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    #loading {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      color: #667eea;
+      font-weight: 600;
+    }
+    #results {
+      margin-top: 30px;
+      display: none;
+    }
+    .result-item {
+      background: #f8f9ff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border-left: 4px solid #667eea;
+    }
+    .result-label {
+      color: #666;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+    .result-value {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .error {
+      background: #fee;
+      color: #c33;
+      padding: 15px;
+      border-radius: 10px;
+      border-left: 4px solid #c33;
+    }
+    .help-text {
+      background: #fff4e6;
+      color: #b45309;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      border-left: 4px solid #f59e0b;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #764ba2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✈️ Bag Tag Scanner</h1>
+    <p class="subtitle">Enter your flight number to find your pier</p>
+    
+    <div style="margin-top: 30px; text-align: center;">
+      <input type="text" id="flightInput" placeholder="Enter flight number (e.g., 1082)" 
+             style="padding: 15px; border: 2px solid #667eea; border-radius: 8px; font-size: 18px; width: 100%; max-width: 400px; text-align: center;">
+      <button onclick="searchFlight()" style="width: 100%; max-width: 400px; margin-top: 15px;">
+        🔍 Search Flight
+      </button>
+    </div>
+
+    <div id="preview">
+      <img id="previewImage" alt="Preview">
+    </div>
+
+    <div id="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Scanning bag tag...</div>
+    </div>
+
+    <div id="results">
+      <div id="resultContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const csvData = `Piers,Flt,Dest,Dept,EQ,PBT
+Pier-02,4461,ABE,13:51,C5G,
+Pier-02,4463,ABE,18:35,C5G,
+Pier-31,1594,ABQ,09:20,37K,
+Pier-31,5484,ABQ,19:45,E75,
+Pier-01F,0426,ALB,08:55,37E,
+Pier-01F,1113,ALB,11:59,73Y,
+Pier-40F,2147,ALB,18:30,20S,
+Pier-28,0909,AMS,18:15,78H,
+Pier-40C,1215,ANC,09:25,37E,
+Pier-40C,1552,ANC,15:50,37X,
+Pier-40C,5383,ASE,19:35,E7T,
+Pier-01F,0422,ATH,16:15,78J,
+Pier-01,1975,ATL,07:20,19F,
+Pier-01,1848,ATL,10:35,73G,
+Pier-01,0356,ATL,14:30,73G,
+Pier-01,1504,ATL,18:20,73Y,
+MU2,5493,ATW,11:05,CRJ,
+MU2,5585,ATW,12:57,CR5,
+MU2,5646,ATW,13:59,CR5,
+MU2,5521,ATW,15:35,CRJ,
+MU2,5526,ATW,18:05,CRJ,
+MU2,4748,ATW,20:20,CR5,
+Pier-03,2369,AUS,08:50,37K,
+Pier-03,1525,AUS,13:40,19F,
+Pier-03,0457,AUS,20:08,73Y,
+MU1,6321,AVL,13:55,E7Q,
+MU1,4464,AVL,18:15,C5G,
+MU4,4501,AVP,13:55,C5G,
+MU4,4546,AVP,18:35,C5G,
+Pier-47,0769,BCN,21:35,78H,
+Pier-40C,5624,BDL,08:50,E75,
+Pier-40C,2195,BDL,11:06,73Y,
+Pier-40C,0291,BDL,18:15,20S,
+Pier-40F,3468,BGR,11:50,E7F,
+Pier-40F,3663,BGR,18:10,E7F,
+Pier-23,4445,BHM,10:55,C5G,
+Pier-27,4599,BHM,19:45,C5G,
+Pier-51,5984,BIL,09:20,E75,
+Pier-08,3700,BNA,07:25,E7F,
+Pier-08,2414,BNA,10:43,37E,
+Pier-08,5949,BNA,12:45,E75,
+Pier-08,2430,BNA,14:10,37E,
+Pier-08,5250,BNA,17:50,E75,
+Pier-08,2628,BNA,21:30,37K,
+Pier-40F,1705,BOI,08:45,19F,
+Pier-40F,5290,BOI,19:45,E7Q,
+Pier-01A,2067,BOS,07:30,73Y,
+Pier-01A,0721,BOS,09:44,37X,
+Pier-01A,0399,BOS,11:05,37E,
+Pier-01A,2138,BOS,14:28,37K,
+Pier-01A,1677,BOS,15:48,19F,
+Pier-01A,1989,BOS,18:20,37K,
+Pier-01A,1129,BOS,20:05,73Y,
+Pier-30/Pier-31,0972,BRU,17:55,78J,
+Pier-10,0786,BTV,11:17,20S,
+Pier-10,0349,BTV,18:35,73Y,
+Pier-29,2038,BUF,07:15,19G,
+Pier-29,4411,BUF,10:35,C5G,
+Pier-29,1448,BUF,14:10,73G,
+Pier-29,1335,BUF,18:20,37K,
+Pier-04,2302,BWI,07:00,20S,
+Pier-04,2333,BWI,10:45,37K,
+Pier-04,1583,BWI,18:35,37K,
+Pier-38,0224,BZN,09:20,73Q,
+Pier-26,0739,BZN,19:59,20S,
+MU2,4476,CAE,13:55,C5G,
+MU2,4491,CAE,18:30,C5G,
+MU1,4780,CAK,11:00,CR5,
+MU1,5358,CAK,14:35,CR5,
+MU1,5352,CAK,18:05,CRJ,
+MU1,5251,CAK,21:08,CR5,
+Pier-51,0987,CDG,18:00,78J,
+Pier-01C,4504,CHA,08:45,C5G,
+Pier-01C,5870,CHA,10:35,CRJ,
+Pier-01C,4170,CHA,14:09,C5G,
+Pier-01C,4507,CHA,20:14,C5G,
+Pier-13,5565,CHO,14:04,CR5,
+Pier-13,5610,CHO,18:06,CR5,
+Pier-07,3584,CHS,10:35,E7F,
+Pier-07,0312,CHS,18:15,20S,
+MU4,4387,CID,09:20,C5G,
+MU4,4389,CID,12:50,C5G,
+MU4,4388,CID,15:35,C5G,
+MU4,5964,CID,17:57,E75,
+MU4,1923,CID,20:10,73G,
+Pier-51,5134,CIU,12:40,CRJ,
+Pier-41,0286,CLE,07:33,37K,
+Pier-41,2629,CLE,10:47,37K,
+Pier-41,1126,CLE,12:57,37E,
+Pier-41,2226,CLE,14:20,37K,
+Pier-41,0714,CLE,18:00,73Y,
+Pier-41,1708,CLE,19:35,73G,
+Pier-41,2094,CLE,21:13,73Y,
+Pier-40C,0556,CLT,07:00,37K,
+Pier-40C,2635,CLT,14:02,19F,
+Pier-40C,0617,CLT,18:35,37E,
+Pier-09,0451,CMH,07:10,37K,
+Pier-09,2364,CMH,10:38,19F,
+Pier-09,3603,CMH,12:58,E7F,
+Pier-09,1492,CMH,14:19,73Y,
+Pier-09,3716,CMH,18:17,E7F,
+Pier-09,3657,CMH,19:35,E7F,
+Pier-09,1641,CMH,21:20,73Y,
+MU1,5099,CMX,11:38,CRJ,
+MU1,5140,CMX,21:05,CRJ,
+MU1,0307,COS,09:15,73G,
+MU1,4638,COS,19:40,E75,
+Pier-01J,5289,CRW,10:35,CRJ,
+Pier-01J,4772,CRW,14:00,CRJ,
+Pier-01J,6790,CRW,18:20,CR5,
+Pier-34,1198,CUN,09:21,37K,
+Pier-28,1659,CUN,10:42,37K,
+Pier-22,3498,CVG,07:10,E7F,
+Pier-22,0476,CVG,10:53,19F,
+Pier-22,3696,CVG,12:55,E7F,
+Pier-22,1941,CVG,14:26,19F,
+Pier-22,2494,CVG,18:10,73G,
+Pier-22,3520,CVG,21:16,E7F,
+MU1,4184,DAY,08:50,C5G,
+MU1,4585,DAY,10:55,C5G,
+MU1,4169,DAY,14:50,C5G,
+MU1,4584,DAY,18:25,C5G,
+MU1,3683,DAY,21:30,E7F,
+Pier-01E,1077,DCA,06:00,73Y,
+Pier-01E,2708,DCA,07:00,19F,
+Pier-01E,1010,DCA,08:00,20S,
+Pier-01E,1851,DCA,09:00,20S,
+Pier-01E,0466,DCA,10:00,19F,
+Pier-01E,1097,DCA,11:15,73Y,
+Pier-01E,0752,DCA,12:50,19F,
+Pier-01E,1693,DCA,13:55,19F,
+Pier-01E,1872,DCA,15:00,73G,
+Pier-01E,1755,DCA,16:00,19F,
+Pier-01E,1269,DCA,18:00,20S,
+Pier-01E,1069,DCA,19:40,19G,
+Pier-04,5111,DEC,07:45,CRJ,
+Pier-40D/Pier-40E,2666,DEN,05:30,37K,
+Pier-40D/Pier-40E,0791,DEN,07:10,21N,
+Pier-40D/Pier-40E,1599,DEN,08:45,77G,
+Pier-40D/Pier-40E,1803,DEN,10:46,21N,
+Pier-40D/Pier-40E,0622,DEN,13:04,77G,
+Pier-40D/Pier-40E,0503,DEN,14:35,75E,
+Pier-40D/Pier-40E,1801,DEN,16:20,75E,
+Pier-40D/Pier-40E,0767,DEN,18:35,21N,
+Pier-40D/Pier-40E,2394,DEN,20:10,37K,
+Pier-40D/Pier-40E,1748,DEN,21:32,21N,
+Pier-11,0729,DFW,07:28,20S,
+Pier-11,1297,DFW,08:45,19F,
+Pier-11,1491,DFW,10:35,20S,
+Pier-11,2290,DFW,12:45,73G,
+Pier-11,0793,DFW,16:20,19F,
+Pier-11,0516,DFW,19:50,73G,
+MU2,5819,DLH,09:00,CR5,
+MU2,5437,DLH,12:50,CR5,
+MU2,5275,DLH,20:15,CR5,
+Pier-01J,1139,DSM,09:00,19F,
+Pier-01J,1830,DSM,13:12,20S,
+Pier-01J,5847,DSM,16:20,E75,
+Pier-01J,1531,DSM,20:20,19F,
+Pier-01J,5280,DSM,21:29,E75,
+Pier-21,5717,DTW,07:35,E75,
+Pier-21,0411,DTW,10:45,73G,
+Pier-21,3569,DTW,12:59,E7F,
+Pier-21,2329,DTW,14:45,19F,
+Pier-21,5833,DTW,18:11,E75,
+Pier-21,2497,DTW,19:35,73Y,
+Pier-21,3493,DTW,21:25,E7F,
+Pier-99,1082,ORD,06:00,75E,`;
+
+    const flightInput = document.getElementById('flightInput');
+
+    let flightsData = [];
+
+    function parseCSV() {
+      const lines = csvData.trim().split('\n');
+      const headers = lines[0].split(',');
+      
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',');
+        if (values.length >= 5) {
+          flightsData.push({
+            pier: values[0],
+            flt: values[1],
+            dest: values[2],
+            dept: values[3],
+            eq: values[4]
+          });
+        }
+      }
+    }
+
+    parseCSV();
+
+    function searchFlight() {
+      const flightInput = document.getElementById('flightInput');
+      const results = document.getElementById('results');
+      const resultContent = document.getElementById('resultContent');
+      
+      const flightInputValue = flightInput.value.trim();
+      
+      if (!flightInputValue) {
+        showError('Please enter a flight number');
+        return;
+      }
+
+      // Try matching as both string and number
+      const matchedFlights = flightsData.filter(f => 
+        f.flt === flightInputValue || f.flt.toString() === flightInputValue
+      );
+
+      if (matchedFlights.length === 0) {
+        showError(`No flight found with number: ${flightInputValue}`);
+        return;
+      }
+
+      results.style.display = 'block';
+      let html = '';
+
+      matchedFlights.forEach(flight => {
+        html += `<div class="result-item" style="border: 2px solid #28a745;">
+          <div class="result-label">Match Found!</div>
+          <div class="result-value" style="font-size:20px; color:#28a745;">Pier: ${flight.pier}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Flight Number</div>
+          <div class="result-value">${flight.flt}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Destination</div>
+          <div class="result-value">${flight.dest}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Departure Time</div>
+          <div class="result-value">${flight.dept}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">Equipment</div>
+          <div class="result-value">${flight.eq}</div>
+        </div>`;
+      });
+
+      resultContent.innerHTML = html;
+    }
+
+    function showError(message) {
+      const results = document.getElementById('results');
+      const resultContent = document.getElementById('resultContent');
+      results.style.display = 'block';
+      resultContent.innerHTML = `<div class="error">${message}</div>`;
+    }
+
+    function reset() {
+      const results = document.getElementById('results');
+      results.style.display = 'none';
+      flightInput.value = '';
+    }
+
+    flightInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchFlight();
+      }
+    });
+  </script>
+</body>
+</html>
