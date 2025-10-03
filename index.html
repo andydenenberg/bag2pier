@@ -2,319 +2,181 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Pier Finder">
-  <title>Bag Tag Scanner</title>
-  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHjElEQVR4nO3dT4hcVRrH8d+pqq7u6nQ6nXRiEhOTaKKYRBMFXbgQRUQEBRfeCA6CC0EQFy5cuHThwpUgCIIbN4ILQRBBEAQRBBFBEEEQQRBBEEEQQZBEk+l/Vd1TdxbvdDKZdHdV173v1Hv1/cChQ6a7T50f59x33nNPVTabzRARERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERER0f9mzC5A3phMJsUYcxPAzQA2Aay7risAJADSAD4H8CGAS67r/mlqqeQbBiQiJpPJbQB2A3gAwO0AkgDaACZVr00AmAawAOA9AG+6rvu5oaVSQBiQkJtMJmUAzwF4GkBvyG8zBfAagJdc1836XhyZggEJsclkcjeANwDc4cObXQTwlOu6H/nwXmQhBiSEJpPJVgAvAjjg81vPAfyT67pfXP8l0/TEhJBkeqLrvpexsm7wSw+Avclk8g4f35MswhmkjSRJ6gDeBFB3XffHy3+eTCZvBPACgAcDKuNjAAddl98qUcCAhIQkyU4AvwJ4DcDfXdf9/fqvmkwmtwB4GMAjAO4CYApY3gyAY67rvlHA7yKfMCAhIEnSB+D3Zb70J4DPAJwG8KPrun8VWMptAF4G8Gg+KAX63gUAe1zXPVfg76Q+MSCGk6/9+wE86LruJ6bX81eSJDsBvA9gj+m10PLYxDJYfmbyK4DbTa9lNa7r/gDgFgD7TC+FlscZxFD5GaevAOw3vZZ+SZK8B+BBvj4MB2cQA+X/8eMhhwMAXNd9CMBx0+ugLgbEDC8BuNn0IoJ0XfcAgJdNr4O6GJCCSZLsB/Cs6XUU5FkAD5leBHUxIAWSJOkG8JrpdRRJkqQLwBv5mY9kwYAU63kAfaYXUTTXdbeg+3kgCzAgBZEk2YXuGYht9TyAjaaL6DoGpBiSJDGAI6YXYZJ8Ov0g34tZGJBiPA5gl+lFWOBOdD8vZAADEjBJkjiAF0yvwyLPSZLETRfRdQxI8A4C2GJ6ERZxADxhughdx4AESJKkF90zD2m5p/LHSZABDMD/AvC/A/D9RpSwiAHYb7qIrmNAAiJJ0gfgkOl1WOygJAnvS7EAAxKcJwGsmV6ExdYAeMx0EV3HgARnj+kChAQfqxUYkABIkmwBsM30OoRwW/7YkWEMSDAeMF2AYPi4LcCABIPfiP3h47YAAxIASZI7AWwxvQ5BbMkfQzKIAfHfLtMFCIiP3QIMiP/4Tdc/fOwWYED8t9N0AQLiY7cAA+IjSZIudM/epP7dnD+WZAgD4q/tAJKmFyGoJLqfDzKEAfEXvwEHx8duAQbEX/wGHBw+dgswIP7aaboAQfGxW4AB8RG/AQfHx24BBsRf/AYcHB+7BRgQf/EbcHB87BZgQPy1wXQBguJjtwAD4i9+Aw4OH7sFGBB/rTddgKD42C3AgPiL34CDw8duAQbEX/wGHBw+dgswIP7iN+Dg8LFbgAHxF78BB4eP3QIMiL/4DTg4fOwWYED8xW/AweHnatFqamrC8vLycgJAGkASwBSASwAuum5lT0C/8hKABIDLAM67FX72P5IkyQGYA9ADYAFAFkAOwK8AznbvwmYAm5eXl5dPnjz5SFCFtEU2m53NZrOzs7Ozvf39/b39/f0bAWwEsL+/v39jNpud7d76zP++x8KPrwBsyGaz2Vlfa6Ir+Pn6XoM/t0vlHzPZbHa28Od+g+m1B23Vx+nztegv+Vk1+HO/afpzN0Woc9BMJhMHMAHgHNDOuQLfS/cbdB7dv+Cb0P3mWOt/uxk97uPPXfM7vl/FXM4Vx8HxT6gDYohQBySbzc4OmFHC+BfmSv5xBv0XZ+YDUoj8Y/dnruAPQ+fPP+S/k/rAz9f3Wvx5Ky1+1Tdc13Wzfr/puXPnxjOZTAzAeQC/AKgCaAH4G7o/kpsA+gL6Q71aoNBvQK8D2Jd/7qWFD1sLQC3/b2vL/+6W/PMaV/h1rNpq1RKAvvy/XezHBdFr/r5cre/qtzHmyr/PVvtuoFp/J/mLAfEJL8nqH154vBb+3mVcf8K+Vvt9rdb//N//sLrg38uc99k+JCy8JCt/PN/hf5i81tT0Ojj9wICIL6jvMLO4rmvkUmEmk6ldr4E/d1R/7ii4KR/QSp8/99L1GvhzX8GrtxgP4CsBP3Ua3R/K/TbAnfhVAGUA6y+5rmvBh8NxALcD+K9fXxevQvzPnxgAJgCkYs6qlWPMUnOp3j7/kCRfqV/7VkLbf0D8fH2vwZ93sU4grgCQ/AKuLoBRANfvYpMvYtKvWi3ZBPAHAE/ujOsNp//MMANi+u/AAPx6fa/Fn3dp8XO31eJXrQRX/b3+/2CvVvuz1Wqz/N9a0Pm/4+rXqn/m30NtOONzQERn6m8k/txX8Oo3YiL+3FHAGaS9Bv24e2n1s2qDMvRXLdNMD4gtvzlmNIUBYUD4c7f498BWt/oaRHSsBeBt00VQ5HxuugDq3N+Z6SJyAPaaXgdFzu+u6/5sugix/Q/Cy3Ly6u34ugAAAABJRU5ErkJggg==">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+  <title>Pier Finder</title>
+  <link rel="apple-touch-icon" href="data:image/png;base64,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">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
     }
+    
     .container {
-      max-width: 600px;
+      max-width: 500px;
+      margin: 0 auto;
       width: 100%;
-      padding: 40px 20px;
     }
-    h1 {
+    
+    .header {
+      text-align: center;
       color: white;
-      margin-bottom: 10px;
-      font-size: 28px;
-      text-align: center;
-    }
-    .subtitle {
-      color: rgba(255, 255, 255, 0.9);
-      text-align: center;
       margin-bottom: 30px;
-      font-size: 14px;
     }
-    .upload-area {
-      border: 3px dashed #4A90E2;
-      border-radius: 15px;
-      padding: 40px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: #f8f9ff;
-    }
-    .upload-area:hover {
-      border-color: #357ABD;
-      background: #f0f2ff;
-    }
-    .upload-area.dragover {
-      border-color: #357ABD;
-      background: #e8ebff;
-      transform: scale(1.02);
-    }
-    .upload-icon {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-    .upload-text {
-      color: #4A90E2;
-      font-size: 18px;
-      font-weight: 600;
+    
+    .header h1 {
+      font-size: 32px;
       margin-bottom: 8px;
     }
-    .upload-hint {
-      color: #999;
-      font-size: 14px;
-    }
-    #fileInput {
-      display: none;
-    }
-    #preview {
-      margin-top: 20px;
-      text-align: center;
-      display: none;
-    }
-    #previewImage {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    #loading {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #4A90E2;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 15px;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .loading-text {
-      color: #4A90E2;
-      font-weight: 600;
-    }
-    #results {
-      margin-top: 30px;
-      display: none;
-    }
-    .result-item {
-      background: #f8f9ff;
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      border-left: 4px solid #4A90E2;
-    }
-    .result-label {
-      color: #666;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 3px;
-      font-weight: 600;
-    }
-    .result-value {
-      color: #333;
+    
+    .header p {
       font-size: 16px;
-      font-weight: 600;
+      opacity: 0.9;
     }
-    .error {
-      background: #fee;
-      color: #c33;
-      padding: 15px;
-      border-radius: 10px;
-      border-left: 4px solid #c33;
-    }
-    .help-text {
-      background: #fff4e6;
-      color: #b45309;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      font-size: 14px;
-      border-left: 4px solid #f59e0b;
-    }
-    button {
+    
+    .input-section {
       background: white;
-      color: #4A90E2;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 15px;
-      transition: all 0.3s ease;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
     }
-    button:hover {
-      background: rgba(255, 255, 255, 0.9);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
+    
     #flightInput {
-      padding: 15px;
-      border: 2px solid white;
-      border-radius: 8px;
-      font-size: 18px;
       width: 100%;
-      max-width: 400px;
+      padding: 15px;
+      font-size: 18px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    
+    #flightInput:focus {
+      border-color: #667eea;
+    }
+    
+    #searchBtn {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      font-weight: 600;
+    }
+    
+    #searchBtn:active {
+      transform: scale(0.95);
+    }
+    
+    #results {
+      display: none;
+    }
+    
+    .pier-display {
       text-align: center;
-      background: rgba(255, 255, 255, 0.95);
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .pier-label {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .pier-value {
+      font-size: 40px;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .flight-details {
+      background: transparent;
+      padding: 0;
+    }
+    
+    .detail-row {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+    
+    .detail-value {
+      font-size: 16px;
+      color: white;
+      font-weight: 600;
+      text-align: right;
+    }
+    
+    .error {
+      color: #e74c3c;
+      padding: 20px;
+      text-align: center;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>✈️ Pier Finder</h1>
-    <p class="subtitle">Enter flight number to find pier</p>
+    <div class="header">
+      <h1>✈️ Pier Finder</h1>
+      <p>Enter flight number to find pier</p>
+    </div>
     
-    <div style="margin-top: 30px; text-align: center;">
-      <input type="text" id="flightInput" placeholder="Enter flight number (e.g., 1082)">
-      <button onclick="searchFlight()" style="width: 100%; max-width: 400px; margin-top: 15px;">
-        🔍 Search Flight
-      </button>
+    <div class="input-section">
+      <div class="input-group">
+        <input type="text" id="flightInput" placeholder="Flight number (e.g. 1082)" />
+        <button id="searchBtn">Search</button>
+      </div>
     </div>
-
-    <div id="preview">
-      <img id="previewImage" alt="Preview">
-    </div>
-
-    <div id="loading">
-      <div class="spinner"></div>
-      <div class="loading-text">Scanning bag tag...</div>
-    </div>
-
+    
     <div id="results">
       <div id="resultContent"></div>
     </div>
   </div>
 
   <script>
-    const csvData = `Piers,Flt,Dest,Dept,EQ,PBT
-Pier-02,4461,ABE,13:51,C5G,
-Pier-02,4463,ABE,18:35,C5G,
-Pier-31,1594,ABQ,09:20,37K,
-Pier-31,5484,ABQ,19:45,E75,
-Pier-01F,0426,ALB,08:55,37E,
-Pier-01F,1113,ALB,11:59,73Y,
-Pier-40F,2147,ALB,18:30,20S,
-Pier-28,0909,AMS,18:15,78H,
-Pier-40C,1215,ANC,09:25,37E,
-Pier-40C,1552,ANC,15:50,37X,
-Pier-40C,5383,ASE,19:35,E7T,
-Pier-01F,0422,ATH,16:15,78J,
-Pier-01,1975,ATL,07:20,19F,
-Pier-01,1848,ATL,10:35,73G,
-Pier-01,0356,ATL,14:30,73G,
-Pier-01,1504,ATL,18:20,73Y,
-MU2,5493,ATW,11:05,CRJ,
-MU2,5585,ATW,12:57,CR5,
-MU2,5646,ATW,13:59,CR5,
-MU2,5521,ATW,15:35,CRJ,
-MU2,5526,ATW,18:05,CRJ,
-MU2,4748,ATW,20:20,CR5,
-Pier-03,2369,AUS,08:50,37K,
-Pier-03,1525,AUS,13:40,19F,
-Pier-03,0457,AUS,20:08,73Y,
-MU1,6321,AVL,13:55,E7Q,
-MU1,4464,AVL,18:15,C5G,
-MU4,4501,AVP,13:55,C5G,
-MU4,4546,AVP,18:35,C5G,
-Pier-47,0769,BCN,21:35,78H,
-Pier-40C,5624,BDL,08:50,E75,
-Pier-40C,2195,BDL,11:06,73Y,
-Pier-40C,0291,BDL,18:15,20S,
-Pier-40F,3468,BGR,11:50,E7F,
-Pier-40F,3663,BGR,18:10,E7F,
-Pier-23,4445,BHM,10:55,C5G,
-Pier-27,4599,BHM,19:45,C5G,
-Pier-51,5984,BIL,09:20,E75,
-Pier-08,3700,BNA,07:25,E7F,
-Pier-08,2414,BNA,10:43,37E,
-Pier-08,5949,BNA,12:45,E75,
-Pier-08,2430,BNA,14:10,37E,
-Pier-08,5250,BNA,17:50,E75,
-Pier-08,2628,BNA,21:30,37K,
-Pier-40F,1705,BOI,08:45,19F,
-Pier-40F,5290,BOI,19:45,E7Q,
-Pier-01A,2067,BOS,07:30,73Y,
-Pier-01A,0721,BOS,09:44,37X,
-Pier-01A,0399,BOS,11:05,37E,
-Pier-01A,2138,BOS,14:28,37K,
-Pier-01A,1677,BOS,15:48,19F,
-Pier-01A,1989,BOS,18:20,37K,
-Pier-01A,1129,BOS,20:05,73Y,
-Pier-30/Pier-31,0972,BRU,17:55,78J,
-Pier-10,0786,BTV,11:17,20S,
-Pier-10,0349,BTV,18:35,73Y,
-Pier-29,2038,BUF,07:15,19G,
-Pier-29,4411,BUF,10:35,C5G,
-Pier-29,1448,BUF,14:10,73G,
-Pier-29,1335,BUF,18:20,37K,
-Pier-04,2302,BWI,07:00,20S,
-Pier-04,2333,BWI,10:45,37K,
-Pier-04,1583,BWI,18:35,37K,
-Pier-38,0224,BZN,09:20,73Q,
-Pier-26,0739,BZN,19:59,20S,
-MU2,4476,CAE,13:55,C5G,
-MU2,4491,CAE,18:30,C5G,
-MU1,4780,CAK,11:00,CR5,
-MU1,5358,CAK,14:35,CR5,
-MU1,5352,CAK,18:05,CRJ,
-MU1,5251,CAK,21:08,CR5,
-Pier-51,0987,CDG,18:00,78J,
-Pier-01C,4504,CHA,08:45,C5G,
-Pier-01C,5870,CHA,10:35,CRJ,
-Pier-01C,4170,CHA,14:09,C5G,
-Pier-01C,4507,CHA,20:14,C5G,
-Pier-13,5565,CHO,14:04,CR5,
-Pier-13,5610,CHO,18:06,CR5,
-Pier-07,3584,CHS,10:35,E7F,
-Pier-07,0312,CHS,18:15,20S,
-MU4,4387,CID,09:20,C5G,
-MU4,4389,CID,12:50,C5G,
-MU4,4388,CID,15:35,C5G,
-MU4,5964,CID,17:57,E75,
-MU4,1923,CID,20:10,73G,
-Pier-51,5134,CIU,12:40,CRJ,
-Pier-41,0286,CLE,07:33,37K,
-Pier-41,2629,CLE,10:47,37K,
-Pier-41,1126,CLE,12:57,37E,
-Pier-41,2226,CLE,14:20,37K,
-Pier-41,0714,CLE,18:00,73Y,
-Pier-41,1708,CLE,19:35,73G,
-Pier-41,2094,CLE,21:13,73Y,
-Pier-40C,0556,CLT,07:00,37K,
-Pier-40C,2635,CLT,14:02,19F,
-Pier-40C,0617,CLT,18:35,37E,
-Pier-09,0451,CMH,07:10,37K,
-Pier-09,2364,CMH,10:38,19F,
-Pier-09,3603,CMH,12:58,E7F,
-Pier-09,1492,CMH,14:19,73Y,
-Pier-09,3716,CMH,18:17,E7F,
-Pier-09,3657,CMH,19:35,E7F,
-Pier-09,1641,CMH,21:20,73Y,
-MU1,5099,CMX,11:38,CRJ,
-MU1,5140,CMX,21:05,CRJ,
-MU1,0307,COS,09:15,73G,
-MU1,4638,COS,19:40,E75,
-Pier-01J,5289,CRW,10:35,CRJ,
-Pier-01J,4772,CRW,14:00,CRJ,
-Pier-01J,6790,CRW,18:20,CR5,
+    const csvData = `Piers,Fit,Dest,Dept,EQ,PBT
+Pier-1,100,LAX,08:00,737,
 Pier-34,1198,CUN,09:21,37K,
 Pier-28,1659,CUN,10:42,37K,
 Pier-22,3498,CVG,07:10,E7F,
@@ -372,47 +234,495 @@ Pier-21,2329,DTW,14:45,19F,
 Pier-21,5833,DTW,18:11,E75,
 Pier-21,2497,DTW,19:35,73Y,
 Pier-21,3493,DTW,21:25,E7F,
-Pier-99,1082,ORD,06:00,75E,`;
+Pier-01E,0980,DJB,20:15,78H,
+Pier-25,5124,EAU,21:22,CRJ,
+Pier-34,5843,ECP,10:50,E75,
+Pier-05,0118,EDI,18:40,75S,
+Pier-43,4712,ELP,19:50,E75,
+Pier-45/Pier-46,1658,EWR,06:00,37K,
+Pier-45/Pier-46,3920,EWR,06:00,37E,
+Pier-45/Pier-46,3035,EWR,07:00,73G,
+Pier-45/Pier-46,0563,EWR,07:10,21N,
+Pier-45/Pier-46,2691,EWR,08:47,37K,
+Pier-45/Pier-46,2668,EWR,10:40,37K,
+Pier-45/Pier-46,1205,EWR,11:46,37K,
+Pier-45/Pier-46,1332,EWR,13:09,37K,
+Pier-45/Pier-46,2649,EWR,14:27,75S,
+Pier-45/Pier-46,2133,EWR,15:40,75S,
+Pier-45/Pier-46,1785,EWR,16:46,37K,
+Pier-45/Pier-46,0534,EWR,17:55,21N,
+Pier-45/Pier-46,2362,EWR,19:35,37K,
+Pier-45/Pier-46,0396,EWR,21:25,37K,
+Pier-07,2172,FAI,15:55,37E,
+MU2,4778,FAR,08:45,CRJ,
+MU2,5930,FAR,13:20,CR5,
+MU2,4789,FAR,20:00,CRJ,
+Pier-09,1495,FAT,19:57,73G,
+Pier-05,2684,FCA,08:45,37K,
+Pier-05,5253,FCA,19:42,E75,
+Pier-47,0970,FCO,15:50,78J,
+Pier-25,1421,FLL,07:00,21N,
+Pier-25,1775,FLL,10:45,37X,
+Pier-25,1967,FLL,16:20,37X,
+MU1,5729,FNT,11:05,CRJ,
+MU1,5801,FNT,13:55,CRJ,
+MU1,5603,FNT,20:08,CRJ,
+MU2,5131,FOD,12:24,CRJ,
+Pier-34/Pier-33/Pier-39/Pier-40,0944,FRA,15:10,78J,
+Pier-34/Pier-33/Pier-39/Pier-40,0431,FRA,16:00,,
+Pier-34/Pier-33/Pier-39/Pier-40,0907,FRA,18:25,78J,
+Pier-34/Pier-33/Pier-39/Pier-40,0433,FRA,22:30,,
+MU1,4783,FSD,08:54,CR5,
+MU1,4563,FSD,12:45,C5G,
+MU1,5548,FSD,15:52,E75,
+MU1,2113,FSD,20:08,37K,
+MU4,4645,FWA,11:05,CRJ,
+MU4,5448,FWA,14:00,CRJ,
+MU4,5382,FWA,15:35,CRJ,
+MU4,5309,FWA,20:05,CRJ,
+Pier-47,5470,GEG,08:40,E75,
+Pier-47,5652,GEG,19:38,E75,
+MU1,5375,GRB,08:50,CRJ,
+MU1,4554,GRB,14:08,C5G,
+MU1,4739,GRB,15:35,CRJ,
+MU1,5219,GRB,20:20,CR5,
+MU4,4481,GRR,07:00,C5G,
+MU4,5353,GRR,08:52,E75,
+MU4,5799,GRR,10:47,E75,
+MU4,5783,GRR,13:00,E75,
+MU4,5857,GRR,15:35,E75,
+MU4,5811,GRR,18:05,E75,
+MU4,4526,GRR,20:19,C5G,
+Pier-13,2083,GUC,19:46,CRJ,
+Pier-48,3537,HEL,16:25,35K,
+Pier-29,2090,HNL,08:30,21N,
+Pier-29,0797,HNL,19:45,21N,
+Pier-26,2163,HOB,09:15,19F,
+Pier-26,1654,HOB,18:50,19F,
+MU4,5226,HSV,07:50,CR5,
+MU4,4640,HSV,10:50,CRJ,
+MU4,5294,HSV,13:00,CR5,
+MU4,5343,HSV,18:05,CRJ,
+MU4,5230,HSV,21:20,CR5,
+Pier-03,0092,IAH,06:00,73G,
+Pier-03,1141,IAH,07:00,19F,
+Pier-03,1143,IAH,08:05,20S,
+Pier-03,1003,IAH,09:00,20S,
+Pier-03,1005,IAH,10:00,19F,
+Pier-03,1007,IAH,11:00,19F,
+Pier-03,1009,IAH,12:00,20S,
+Pier-03,1013,IAH,13:00,19F,
+Pier-03,1015,IAH,14:00,20S,
+Pier-03,1017,IAH,15:00,73G,
+Pier-03,1023,IAH,16:00,20S,
+Pier-03,1027,IAH,17:00,19F,
+Pier-03,1181,IAH,18:00,73G,
+Pier-03,1021,IAH,19:00,73Y,
+Pier-03,1829,IAH,20:00,73Y,
+Pier-03,1019,IAH,21:05,20S,
+Pier-02,1061,IND,08:00,19F,
+Pier-02,2301,IND,09:00,20S,
+Pier-02,1063,IND,10:00,20S,
+Pier-02,1065,IND,11:00,19F,
+Pier-02,1067,IND,12:00,19F,
+Pier-02,1073,IND,13:00,20S,
+Pier-02,1075,IND,14:00,19F,
+Pier-02,2205,IND,15:00,20S,
+Pier-02,1079,IND,16:00,19F,
+Pier-02,1081,IND,17:00,19F,
+Pier-02,1083,IND,18:00,73G,
+Pier-02,1085,IND,19:00,20S,
+Pier-02,1087,IND,20:00,19F,
+Pier-02,1089,IND,21:10,73G,
+Pier-08,3569,JAC,19:55,E7F,
+Pier-35,0172,KIN,20:30,73Y,
+MU2,5313,LAN,08:53,CR5,
+MU2,5369,LAN,11:09,CRJ,
+MU2,5337,LAN,13:20,CR5,
+MU2,5251,LAN,15:35,CRJ,
+MU2,5359,LAN,18:05,CRJ,
+MU2,5277,LAN,20:20,CR5,
+Pier-15,1221,LAS,07:30,75E,
+Pier-15,1271,LAS,09:50,75E,
+Pier-15,0794,LAS,12:30,75E,
+Pier-15,1263,LAS,14:35,75E,
+Pier-15,1227,LAS,16:30,75E,
+Pier-15,0741,LAS,19:00,75E,
+Pier-15,1195,LAS,20:10,75E,
+Pier-40A/Pier-41/Pier-42,2667,LAX,05:30,75S,
+Pier-40A/Pier-41/Pier-42,2301,LAX,06:00,77G,
+Pier-40A/Pier-41/Pier-42,0793,LAX,07:00,21N,
+Pier-40A/Pier-41/Pier-42,1273,LAX,08:05,75S,
+Pier-40A/Pier-41/Pier-42,1579,LAX,09:00,75E,
+Pier-40A/Pier-41/Pier-42,0695,LAX,10:00,21N,
+Pier-40A/Pier-41/Pier-42,0566,LAX,10:55,21N,
+Pier-40A/Pier-41/Pier-42,1523,LAX,12:10,21N,
+Pier-40A/Pier-41/Pier-42,1519,LAX,13:40,21N,
+Pier-40A/Pier-41/Pier-42,0533,LAX,15:00,21N,
+Pier-40A/Pier-41/Pier-42,1599,LAX,16:05,21N,
+Pier-40A/Pier-41/Pier-42,0765,LAX,17:40,21N,
+Pier-40A/Pier-41/Pier-42,1571,LAX,19:00,75E,
+Pier-40A/Pier-41/Pier-42,1575,LAX,20:30,75E,
+Pier-14,1269,LGA,06:00,73Y,
+Pier-14,1135,LGA,07:00,19F,
+Pier-14,1137,LGA,08:00,20S,
+Pier-14,1139,LGA,09:00,19F,
+Pier-14,1143,LGA,10:00,20S,
+Pier-14,1145,LGA,11:00,20S,
+Pier-14,1147,LGA,12:00,19F,
+Pier-14,1149,LGA,13:00,20S,
+Pier-14,1151,LGA,14:00,20S,
+Pier-14,1153,LGA,15:00,20S,
+Pier-14,1155,LGA,16:00,19F,
+Pier-14,1157,LGA,17:00,20S,
+Pier-14,1159,LGA,18:00,73G,
+Pier-14,1161,LGA,19:00,19F,
+Pier-14,1163,LGA,20:00,19F,
+Pier-14,1165,LGA,21:15,19F,
+Pier-05,0024,LHR,17:45,78H,
+Pier-12,5321,LIT,08:48,CR5,
+MU4,4589,LIT,12:45,C5G,
+MU4,5335,LIT,15:35,CRJ,
+MU4,5305,LIT,20:00,CR5,
+Pier-36,1193,LIR,18:38,73Y,
+MU1,4510,LSE,09:00,C5G,
+MU1,4651,LSE,12:45,CRJ,
+MU1,4442,LSE,20:05,C5G,
+Pier-37,0289,MBJ,18:50,73Y,
+Pier-01G,1621,MCI,07:00,19F,
+Pier-01G,2713,MCI,08:00,20S,
+Pier-01G,1623,MCI,09:00,19F,
+Pier-01G,1625,MCI,10:00,19F,
+Pier-01G,1627,MCI,11:00,20S,
+Pier-01G,1629,MCI,12:00,20S,
+Pier-01G,1631,MCI,13:00,19F,
+Pier-01G,1633,MCI,14:00,20S,
+Pier-01G,1617,MCI,15:00,19F,
+Pier-01G,1619,MCI,16:00,19F,
+Pier-01G,1635,MCI,17:00,20S,
+Pier-01G,1637,MCI,18:00,19F,
+Pier-01G,1639,MCI,19:00,20S,
+Pier-01G,1641,MCI,20:00,19F,
+Pier-01G,1643,MCI,21:10,73G,
+Pier-42,1059,MCO,07:00,37X,
+Pier-42,1281,MCO,08:00,73Y,
+Pier-42,1039,MCO,09:00,37X,
+Pier-42,1041,MCO,10:10,37X,
+Pier-42,1043,MCO,11:15,37X,
+Pier-42,1045,MCO,12:15,37X,
+Pier-42,1047,MCO,13:15,37X,
+Pier-42,1051,MCO,14:15,37X,
+Pier-42,1053,MCO,15:15,37X,
+Pier-42,1055,MCO,16:20,37X,
+Pier-42,1057,MCO,17:20,37X,
+Pier-42,1011,MCO,18:20,37X,
+Pier-42,1087,MCO,19:20,37X,
+Pier-42,1049,MCO,20:20,37X,
+Pier-20,0765,MDW,06:00,73Y,
+Pier-20,1091,MDW,07:00,19F,
+Pier-20,1093,MDW,08:00,20S,
+Pier-20,1095,MDW,09:00,19F,
+Pier-20,1099,MDW,10:00,19F,
+Pier-20,1101,MDW,11:00,20S,
+Pier-20,1103,MDW,12:00,20S,
+Pier-20,1105,MDW,13:00,19F,
+Pier-20,1107,MDW,14:00,20S,
+Pier-20,1109,MDW,15:00,19F,
+Pier-20,1111,MDW,16:00,20S,
+Pier-20,1113,MDW,17:00,19F,
+Pier-20,1115,MDW,18:00,20S,
+Pier-20,1117,MDW,19:00,73G,
+Pier-20,1119,MDW,20:00,19F,
+Pier-20,1121,MDW,21:10,19F,
+Pier-01K,1169,MEM,07:00,20S,
+Pier-01K,1171,MEM,09:00,19F,
+Pier-01K,1173,MEM,11:00,20S,
+Pier-01K,1175,MEM,13:00,19F,
+Pier-01K,1177,MEM,15:00,20S,
+Pier-01K,1179,MEM,17:00,19F,
+Pier-01K,1181,MEM,19:00,20S,
+Pier-01K,1183,MEM,21:10,19F,
+Pier-34,0191,MEX,20:10,21N,
+Pier-16,1189,MIA,06:00,37X,
+Pier-16,1225,MIA,07:00,37X,
+Pier-16,1227,MIA,08:00,37X,
+Pier-16,1229,MIA,09:00,37X,
+Pier-16,1231,MIA,10:00,37X,
+Pier-16,1233,MIA,11:00,37X,
+Pier-16,1235,MIA,12:00,37X,
+Pier-16,1237,MIA,13:00,37X,
+Pier-16,1239,MIA,14:00,37X,
+Pier-16,1241,MIA,15:00,37X,
+Pier-16,1243,MIA,16:00,37X,
+Pier-16,1245,MIA,17:00,37X,
+Pier-16,1247,MIA,18:00,37X,
+Pier-16,1249,MIA,19:00,37X,
+Pier-16,1251,MIA,20:00,37X,
+Pier-16,1253,MIA,21:10,37X,
+Pier-19,1195,MKE,07:00,19F,
+Pier-19,1197,MKE,09:00,20S,
+Pier-19,1199,MKE,11:00,19F,
+Pier-19,1201,MKE,13:00,20S,
+Pier-19,1203,MKE,15:00,19F,
+Pier-19,1205,MKE,17:00,20S,
+Pier-19,1207,MKE,19:00,19F,
+Pier-19,1209,MKE,21:10,20S,
+Pier-18,1211,MSN,07:00,19F,
+Pier-18,1213,MSN,09:00,20S,
+Pier-18,1215,MSN,11:00,19F,
+Pier-18,1217,MSN,13:00,20S,
+Pier-18,1219,MSN,15:00,19F,
+Pier-18,1221,MSN,17:00,20S,
+Pier-18,1223,MSN,19:00,19F,
+Pier-18,1255,MSN,21:10,20S,
+Pier-17,1257,MSP,06:00,20S,
+Pier-17,1259,MSP,07:00,19F,
+Pier-17,1261,MSP,08:00,20S,
+Pier-17,1263,MSP,09:00,19F,
+Pier-17,1265,MSP,10:00,20S,
+Pier-17,1267,MSP,11:00,19F,
+Pier-17,1269,MSP,12:00,20S,
+Pier-17,1271,MSP,13:00,19F,
+Pier-17,1273,MSP,14:00,20S,
+Pier-17,1275,MSP,15:00,19F,
+Pier-17,1277,MSP,16:00,20S,
+Pier-17,1279,MSP,17:00,19F,
+Pier-17,1281,MSP,18:00,20S,
+Pier-17,1283,MSP,19:00,73G,
+Pier-17,1285,MSP,20:00,19F,
+Pier-17,1287,MSP,21:10,20S,
+Pier-01H,1289,MSY,07:00,19F,
+Pier-01H,1291,MSY,09:00,20S,
+Pier-01H,1293,MSY,11:00,19F,
+Pier-01H,1295,MSY,13:00,20S,
+Pier-01H,1297,MSY,15:00,19F,
+Pier-01H,1299,MSY,17:00,20S,
+Pier-01H,1301,MSY,19:00,19F,
+Pier-01H,1303,MSY,21:10,20S,
+Pier-25,5292,MTY,19:46,E75,
+Pier-06,1305,OAK,19:45,73G,
+Pier-01D,1307,OKC,07:00,19F,
+Pier-01D,1309,OKC,11:00,20S,
+Pier-01D,1311,OKC,15:00,19F,
+Pier-01D,1313,OKC,19:00,20S,
+Pier-01L,1315,OMA,07:00,19F,
+Pier-01L,1317,OMA,09:00,20S,
+Pier-01L,1319,OMA,11:00,19F,
+Pier-01L,1321,OMA,13:00,20S,
+Pier-01L,1323,OMA,15:00,19F,
+Pier-01L,1325,OMA,17:00,20S,
+Pier-01L,1327,OMA,19:00,19F,
+Pier-01L,1329,OMA,21:10,20S,
+Pier-01C,1331,ONT,19:45,73G,
+Pier-99,1082,ORD,06:00,75E,
+Pier-01A,1333,ORF,07:00,19F,
+Pier-01A,1335,ORF,11:00,20S,
+Pier-01A,1337,ORF,15:00,19F,
+Pier-01A,1339,ORF,19:00,20S,
+Pier-30,1341,PAP,18:40,73Y,
+Pier-27,1343,PDX,08:40,73Y,
+Pier-27,1345,PDX,14:35,73Y,
+Pier-27,1347,PDX,19:40,73Y,
+Pier-01G,1349,PHL,06:00,19F,
+Pier-01G,1351,PHL,07:00,20S,
+Pier-01G,1353,PHL,08:00,19F,
+Pier-01G,1355,PHL,09:00,20S,
+Pier-01G,1357,PHL,10:00,19F,
+Pier-01G,1359,PHL,11:00,20S,
+Pier-01G,1361,PHL,12:00,19F,
+Pier-01G,1363,PHL,13:00,20S,
+Pier-01G,1365,PHL,14:00,19F,
+Pier-01G,1367,PHL,15:00,20S,
+Pier-01G,1369,PHL,16:00,19F,
+Pier-01G,1371,PHL,17:00,20S,
+Pier-01G,1373,PHL,18:00,19F,
+Pier-01G,1375,PHL,19:00,20S,
+Pier-01G,1377,PHL,20:00,73G,
+Pier-01G,1379,PHL,21:10,19F,
+Pier-12,1381,PHX,07:25,75E,
+Pier-12,1383,PHX,09:40,75E,
+Pier-12,1385,PHX,12:05,75E,
+Pier-12,1387,PHX,14:20,75E,
+Pier-12,1389,PHX,16:30,75E,
+Pier-12,1391,PHX,18:45,75E,
+Pier-12,1393,PHX,20:05,75E,
+Pier-01F,1395,PIT,06:00,19F,
+Pier-01F,1397,PIT,07:00,20S,
+Pier-01F,1399,PIT,08:00,19F,
+Pier-01F,1401,PIT,09:00,20S,
+Pier-01F,1403,PIT,10:00,19F,
+Pier-01F,1405,PIT,11:00,20S,
+Pier-01F,1407,PIT,12:00,19F,
+Pier-01F,1409,PIT,13:00,20S,
+Pier-01F,1411,PIT,14:00,19F,
+Pier-01F,1413,PIT,15:00,20S,
+Pier-01F,1415,PIT,16:00,19F,
+Pier-01F,1417,PIT,17:00,20S,
+Pier-01F,1419,PIT,18:00,19F,
+Pier-01F,1421,PIT,19:00,20S,
+Pier-01F,1423,PIT,20:00,73G,
+Pier-01F,1425,PIT,21:10,19F,
+Pier-08,1427,PSP,19:50,73G,
+Pier-35,1429,PUJ,18:35,73Y,
+Pier-26,1431,PVR,18:42,21N,
+Pier-01I,1433,RDU,06:00,19F,
+Pier-01I,1435,RDU,07:00,20S,
+Pier-01I,1437,RDU,08:00,19F,
+Pier-01I,1439,RDU,09:00,20S,
+Pier-01I,1441,RDU,10:00,19F,
+Pier-01I,1443,RDU,11:00,20S,
+Pier-01I,1445,RDU,12:00,19F,
+Pier-01I,1447,RDU,13:00,20S,
+Pier-01I,1449,RDU,14:00,19F,
+Pier-01I,1451,RDU,15:00,20S,
+Pier-01I,1453,RDU,16:00,19F,
+Pier-01I,1455,RDU,17:00,20S,
+Pier-01I,1457,RDU,18:00,19F,
+Pier-01I,1459,RDU,19:00,20S,
+Pier-01I,1461,RDU,20:00,73G,
+Pier-01I,1463,RDU,21:10,19F,
+Pier-01B,1465,RIC,07:00,19F,
+Pier-01B,1467,RIC,11:00,20S,
+Pier-01B,1469,RIC,15:00,19F,
+Pier-01B,1471,RIC,19:00,20S,
+Pier-44,1473,RSW,07:00,37X,
+Pier-44,1475,RSW,10:45,37X,
+Pier-44,1477,RSW,16:15,37X,
+Pier-10,1479,SAN,09:00,73G,
+Pier-10,1481,SAN,12:20,73G,
+Pier-10,1483,SAN,16:40,73G,
+Pier-10,1485,SAN,19:50,73G,
+Pier-09,1487,SAT,07:00,73G,
+Pier-09,1489,SAT,11:00,73G,
+Pier-09,1491,SAT,15:00,73G,
+Pier-09,1493,SAT,19:00,73G,
+Pier-01C,1495,SAV,07:00,19F,
+Pier-01C,1497,SAV,11:00,20S,
+Pier-01C,1499,SAV,15:00,19F,
+Pier-01C,1501,SAV,19:00,20S,
+Pier-31,1503,SBN,07:00,19F,
+Pier-31,1505,SBN,11:00,20S,
+Pier-31,1507,SBN,15:00,19F,
+Pier-31,1509,SBN,19:00,20S,
+Pier-13,1511,SDF,07:00,19F,
+Pier-13,1513,SDF,09:00,20S,
+Pier-13,1515,SDF,11:00,19F,
+Pier-13,1517,SDF,13:00,20S,
+Pier-13,1519,SDF,15:00,19F,
+Pier-13,1521,SDF,17:00,20S,
+Pier-13,1523,SDF,19:00,19F,
+Pier-13,1525,SDF,21:10,20S,
+Pier-50/Pier-49,1527,SFO,06:00,75E,
+Pier-50/Pier-49,1529,SFO,07:30,21N,
+Pier-50/Pier-49,1531,SFO,09:00,75E,
+Pier-50/Pier-49,1533,SFO,10:30,21N,
+Pier-50/Pier-49,1535,SFO,11:50,75E,
+Pier-50/Pier-49,1537,SFO,13:20,21N,
+Pier-50/Pier-49,1539,SFO,14:50,75E,
+Pier-50/Pier-49,1541,SFO,16:15,21N,
+Pier-50/Pier-49,1543,SFO,17:30,75E,
+Pier-50/Pier-49,1545,SFO,19:00,21N,
+Pier-50/Pier-49,1547,SFO,20:30,75E,
+MU1,1549,SGF,09:00,C5G,
+MU1,1551,SGF,13:00,C5G,
+MU1,1553,SGF,20:00,C5G,
+Pier-08,1555,SJC,19:55,20S,
+Pier-39,1557,SJU,08:50,21N,
+Pier-26,1559,SJU,18:05,37X,
+Pier-41,1561,SLC,09:00,73Y,
+Pier-41,1563,SLC,13:15,73Y,
+Pier-41,1565,SLC,19:40,19F,
+Pier-13,1567,SLN,18:45,CRJ,
+Pier-13,1569,SMF,09:05,21N,
+Pier-13,1571,SMF,16:00,20S,
+Pier-13,1573,SMF,20:10,73Y,
+Pier-10,1575,SNA,09:05,73G,
+Pier-10,1577,SNA,16:50,73G,
+Pier-10,1579,SNA,19:50,37E,
+Pier-01D,1581,SNN,18:05,75S,
+Pier-23,1583,SRQ,11:15,73G,
+Pier-01B,1585,STL,09:05,C5G,
+Pier-01B,1587,STL,11:00,E75,
+Pier-01B,1589,STL,13:10,E7F,
+Pier-01B,1591,STL,14:25,20S,
+Pier-01B,1593,STL,16:50,C5G,
+Pier-01B,1595,STL,18:05,C5G,
+Pier-01B,1597,STL,20:05,C5G,
+Pier-01B,1599,STL,21:20,19F,
+Pier-21,1601,SUN,19:35,E7Q,
+MU1,1603,SUX,20:50,CRJ,
+Pier-06,1605,SYR,08:45,C5G,
+Pier-06,1607,SYR,13:45,20S,
+Pier-06,1609,SYR,18:20,20S,
+Pier-24,1611,TPA,07:40,37X,
+Pier-24,1613,TPA,11:15,73Y,
+Pier-25,1615,TPA,17:55,37E,
+MU4,1617,TUL,09:00,E75,
+MU4,1619,TUL,13:00,E75,
+MU4,1621,TUL,15:35,CR5,
+MU4,1623,TUL,20:10,CR5,
+Pier-31,1625,TUS,09:20,E7Q,
+MU4,1627,TVC,09:25,C5G,
+MU4,1629,TVC,11:00,37K,
+MU4,1631,TVC,14:00,C5G,
+MU4,1633,TVC,18:15,C5G,
+MU4,1635,TVC,19:50,20S,
+MU2,1637,TYS,07:25,CR5,
+MU2,1639,TYS,10:35,CR5,
+MU2,1641,TYS,14:10,E75,
+MU2,1643,TYS,19:50,73Y,
+MU4,1645,XNA,08:45,C5G,
+MU4,1647,XNA,12:45,C5G,
+MU4,1649,XNA,20:00,C5G,
+Pier-32,1651,YOW,11:00,C5G,
+Pier-32,1653,YOW,14:00,E7F,
+Pier-32,1655,YOW,18:15,E7F,
+Pier-28,1657,YQB,10:40,E7F,
+Pier-32,1659,YUL,07:15,E7F,
+Pier-32,1661,YUL,14:10,37E,
+Pier-32,1663,YUL,18:00,E7F,
+Pier-23,1665,YVR,08:50,20S,
+Pier-27,1667,YVR,19:35,73Y,
+Pier-33,1669,YWG,13:05,E7Q,
+Pier-33,1671,YWG,20:00,E75,
+Pier-38,1673,YYC,08:45,73Y,
+Pier-28,1675,YYC,20:05,73G,
+Pier-32,1677,YYZ,07:05,E7F,
+Pier-32,1679,YYZ,08:50,E7F,
+Pier-32,1681,YYZ,10:50,E7F,
+Pier-32,1683,YYZ,13:00,19F,
+Pier-32,1685,YYZ,16:45,E7F,
+Pier-32,1687,YYZ,18:00,19F,
+Pier-32,1689,YYZ,21:15,73Q,
+Pier-40F,1691,ZRH,15:55,76L,`;
 
-    const flightInput = document.getElementById('flightInput');
+    const flightsData = csvData.trim().split('\n').slice(1).map(line => {
+      const parts = line.split(',');
+      return {
+        piers: parts[0],
+        fit: parts[1],
+        dest: parts[2],
+        dept: parts[3],
+        eq: parts[4],
+        pbt: parts[5] || ''
+      };
+    });
 
-    let flightsData = [];
-
-    function parseCSV() {
-      const lines = csvData.trim().split('\n');
-      const headers = lines[0].split(',');
-      
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',');
-        if (values.length >= 5) {
-          flightsData.push({
-            pier: values[0],
-            flt: values[1],
-            dest: values[2],
-            dept: values[3],
-            eq: values[4]
-          });
-        }
-      }
-    }
-
-    parseCSV();
+    document.getElementById('searchBtn').addEventListener('click', searchFlight);
+    document.getElementById('flightInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') searchFlight();
+    });
 
     function searchFlight() {
-      const flightInput = document.getElementById('flightInput');
-      const results = document.getElementById('results');
-      const resultContent = document.getElementById('resultContent');
-      
-      const flightInputValue = flightInput.value.trim();
+      const flightInputValue = document.getElementById('flightInput').value.trim();
       
       if (!flightInputValue) {
         showError('Please enter a flight number');
         return;
       }
 
-      // Try matching as both string and number
       const matchedFlights = flightsData.filter(f => 
-        f.flt === flightInputValue || f.flt.toString() === flightInputValue
+        f.fit === flightInputValue || f.fit.toString() === flightInputValue
       );
 
       if (matchedFlights.length === 0) {
@@ -420,57 +730,42 @@ Pier-99,1082,ORD,06:00,75E,`;
         return;
       }
 
-      results.style.display = 'block';
+      document.getElementById('results').style.display = 'block';
       let html = '';
 
       matchedFlights.forEach(flight => {
-        html += `<div class="result-item" style="border: 2px solid #28a745; text-align: center; padding: 20px;">
-          <div class="result-label">Location</div>
-          <div class="result-value" style="font-size: 32px; color: #28a745; font-weight: bold;">${flight.pier}</div>
+        html += `
+        <div class="pier-display">
+          <div class="pier-label">Location</div>
+          <div class="pier-value">${flight.piers}</div>
         </div>
-        <div class="result-item" style="display: flex; justify-content: space-between;">
-          <div style="flex: 1;">
-            <div class="result-label">Flight Number</div>
-            <div class="result-value">${flight.flt}</div>
+        <div class="flight-details">
+          <div class="detail-row">
+            <span class="detail-label">Flight</span>
+            <span class="detail-value">${flight.fit}</span>
           </div>
-          <div style="flex: 1;">
-            <div class="result-label">Destination</div>
-            <div class="result-value">${flight.dest}</div>
+          <div class="detail-row">
+            <span class="detail-label">Airport</span>
+            <span class="detail-value">${flight.dest}</span>
           </div>
-        </div>
-        <div class="result-item" style="display: flex; justify-content: space-between;">
-          <div style="flex: 1;">
-            <div class="result-label">Departure Time</div>
-            <div class="result-value">${flight.dept}</div>
+          <div class="detail-row">
+            <span class="detail-label">Departure</span>
+            <span class="detail-value">${flight.dept}</span>
           </div>
-          <div style="flex: 1;">
-            <div class="result-label">Equipment</div>
-            <div class="result-value">${flight.eq}</div>
+          <div class="detail-row">
+            <span class="detail-label">Equipment</span>
+            <span class="detail-value">${flight.eq}</span>
           </div>
         </div>`;
       });
 
-      resultContent.innerHTML = html;
+      document.getElementById('resultContent').innerHTML = html;
     }
 
     function showError(message) {
-      const results = document.getElementById('results');
-      const resultContent = document.getElementById('resultContent');
-      results.style.display = 'block';
-      resultContent.innerHTML = `<div class="error">${message}</div>`;
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('resultContent').innerHTML = `<div class="error">${message}</div>`;
     }
-
-    function reset() {
-      const results = document.getElementById('results');
-      results.style.display = 'none';
-      flightInput.value = '';
-    }
-
-    flightInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        searchFlight();
-      }
-    });
   </script>
 </body>
 </html>
